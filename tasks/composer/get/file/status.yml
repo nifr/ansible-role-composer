@@ -1,0 +1,25 @@
+---
+
+##
+## @param <string> composer_phar_path
+##
+## @register <dict|command_results> composer_install_status_command
+##
+- name: "composer:get:file:status:command | Check for existance of file in target path "
+  shell:        'ls {{ item.target }}'
+  register:     'composer_install_status_command'
+  with_items:
+  - '{ "target": "{{ composer_file_path }}" }'
+  sudo:         yes
+  changed_when: '( false )'
+  failed_when:  '( false )'
+
+##
+## @param <dict|command_results> composer_install_status_command
+##
+## @register <bool> composer_file_exists
+##
+- name: "composer:get:file:status:register | Register installation status "
+  set_fact: 'composer_file_exists={{item.composer_file_exists}}'
+  with_items:
+    - '{ "composer_file_exists": "{{ true if (composer_install_status_command.results.0.rc|default(1) == 0) else false }}" }'

@@ -1,0 +1,15 @@
+---
+
+##
+## @param <string|file_path> composer_file_path
+## @param <string|group_name> composer_file_group_name
+##
+- name: "composer:set:file:group | Create group for composer users "
+  file:
+    path:  "{{item.file}}"
+    group: "{{item.group}}"
+    state: file
+  with_items:
+    - '{ "file": "{{ composer_file_path }}", "group": "{{ composer_file_group_name|default("<not set>", true) }}" }'
+  sudo: yes
+

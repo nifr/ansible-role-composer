@@ -1,0 +1,13 @@
+---
+
+##
+## @var <string|filepath> composer_executable_path
+##
+- name: "composer:create:executable:directory | Ensure executable directory exists "
+  file:
+    state: 'directory'
+    path:  '{{ item.directory }}'
+  with_items:
+    - '{"directory":"{{ composer_executable_path|dirname if composer_executable_path|default(false) else "none" }}"}'
+  when: 'item != "none"'
+  sudo: 'yes'

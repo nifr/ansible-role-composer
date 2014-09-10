@@ -1,0 +1,13 @@
+---
+
+##
+## @param <string|file_path> composer_target_path
+## @param <int|string|chmod_value> composer_file_mode
+##
+- name: "composer:set:file:mode | Set the file archive's filemode "
+  file:
+    path: '{{ item.file }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - '{ "file": "{{ composer_file_path }}", "mode": "{{ composer_file_mode|default("<not set>", true) }}" }'
+  sudo:  yes

@@ -1,0 +1,13 @@
+---
+
+##
+## @param <string> composer_download_url
+## @param <string> composer_file_path
+##
+- name: "composer:download:file | Download file archive to target directory "
+  get_url:
+    url:  '{{ item.url }}'
+    dest: '{{ item.target }}'
+  sudo: yes
+  with_items:
+    - '{ "url": "{{ composer_download_url }}", "target": "{{ composer_file_path }}" }'

@@ -1,0 +1,12 @@
+---
+
+##
+## @param <string|group_name> composer_file_group_name
+##
+- name: "composer:create:file:group | Create group for composer users "
+  group:
+    name: '{{ item.group }}'
+    state: 'present'
+  with_items:
+    - '{ "group": "{{ composer_file_group_name|default("<not set>", true) }}" }'
+  sudo: yes

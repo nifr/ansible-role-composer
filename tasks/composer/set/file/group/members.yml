@@ -1,0 +1,14 @@
+---
+
+##
+## @param <string|group_name> composer_file_group_name
+## @param <list(user_name)> composer_group_members
+##
+- name: "composer:set:group:members | Add allowed members to composer group"
+  user:
+    name:   '{{ item }}'
+    groups: '{{ composer_file_group_name }}'
+    append: 'yes'
+  with_items:
+    - '{{ composer_file_group_members }}'
+  sudo:   'yes'

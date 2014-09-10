@@ -1,0 +1,14 @@
+---
+
+##
+## @oaram <string|file_path> composer_target_path
+## @param <string|user_name> composer_owner_name
+##
+- name: "composer:set:file:owner | Set the file archive's user ownership "
+  file:
+    path:  "{{item.file}}"
+    group: "{{item.user}}"
+    state: file
+  with_items:
+    - '{ "file": "{{ composer_file_path }}", "user": "{{ composer_file_owner_name|default("<not set>", true) }}" }'
+  sudo: yes

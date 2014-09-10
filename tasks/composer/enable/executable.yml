@@ -1,0 +1,14 @@
+---
+
+##
+## @param <string|file_path> composer_file_path
+## @param <string|file_path> composer_executable_path
+##
+- name: "composer:enable:executable | Enable / Link executable to bin-dir "
+  file:
+    dest:  "{{item.dest}}"
+    src:   "{{item.src}}"
+    state: link
+  with_items:
+    - '{ "dest": "{{ composer_executable_path }}", "src": "{{ composer_file_path }}" }'
+  sudo: yes
