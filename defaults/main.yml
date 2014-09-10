@@ -1,0 +1,24 @@
+composer:
+  download:
+    url:       'https://getcomposer.org/composer.phar'
+  phar:
+    path:      '/opt/composer/composer.phar'
+  executable:
+    path:      '/usr/local/bin/composer'
+    group:     ~
+    mode:      '0770'
+  config:
+    home:      '~/.configure/composer'
+    cache_dir: '~/.cache/composer'
+
+
+composer_download_url:     'https://getcomposer.org/composer.phar'
+composer_phar_path:        '/opt/composer/composer.phar'
+composer_executable_path:  '/usr/local/bin/composer'
+composer_phar_owner:       'root'
+composer_phar_mode:        '0770'
+composer_owner_name:       'root'
+composer_group_name:       'composer'
+composer_group_members:    []
+composer_config_home:      '~/.configure/composer'
+composer_config_cache_dir: '~/.cache/composer'

@@ -1,0 +1,10 @@
+---
+
+- name: "composer:phar:download | Download phar archive to target directory "
+  get_url:
+    url:  '{{item.url}}'
+    dest: '{{item.target}}'
+  sudo: yes
+  with_items:
+    - '{ "url": "{{ composer_download_url }}", "target": "{{ composer_phar_path }}" }'
+

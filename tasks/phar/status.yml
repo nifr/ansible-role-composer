@@ -1,0 +1,15 @@
+---
+
+- name: "composer:phar:status:command | Check for existance of phar in target path "
+  shell:        'ls {{ item.target }}'
+  register:     'composer_install_status_command'
+  with_items:
+  - '{ "target": "{{ composer_phar_path }}" }'
+  sudo:         'yes'
+  changed_when: 'false'
+  failed_when:  'false'
+
+- name: "composer:phar:status:register | Register installation status "
+  set_fact: 'composer_phar_exists={{item.composer_phar_exists}}'
+  with_items:
+    - '{ "composer_phar_exists": "{{ true if (composer_install_status_command.results.0.rc|default(1) == 0) else false }}" }'

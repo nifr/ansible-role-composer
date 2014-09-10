@@ -1,0 +1,11 @@
+---
+
+- name: "composer:executable:link | Ensure executable link to bin-din "
+  file:
+    dest:  "{{item.dest}}"
+    src:   "{{item.src}}"
+    state: link
+  with_items:
+    - '{ "dest": "{{ composer_executable_path }}", "src": "{{ composer_phar_path }}" }'
+  when: '(item.dest|default("none") != "none") and (item.src|default("none") != "none")'
+  sudo: yes

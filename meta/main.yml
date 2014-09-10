@@ -1,0 +1,20 @@
+---
+
+galaxy_info:
+  author: Nicolai Fröhlich
+  description: A full-featured composer role for ansible.
+  company: Nicolai Fröhlich
+  license: MIT
+
+  min_ansible_version: 1.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+
+  categories:
+   - packaging
+   - system
+
+dependencies: []

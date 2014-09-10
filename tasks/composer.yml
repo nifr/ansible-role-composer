@@ -1,0 +1,99 @@
+---
+
+# requires:
+# - composer_phar_path
+# creates:
+# - composer_is_installed
+- include: phar/status.yml
+  tags:
+    - composer
+    - phar
+    - status
+
+# requires:
+# - composer_phar_path
+- include: phar/directory.yml
+  when: "not composer_phar_exists|bool"
+  tags:
+    - composer
+    - phar
+    - directory
+
+# requires:
+# - composer_download_url
+# - composer_phar_path
+# - composer_is_installed
+- include: phar/download.yml
+  when: "not composer_phar_exists|bool"
+  tags:
+    - composer
+    - phar
+    - download
+
+# requires:
+# - composer_phar_path
+# - composer_executable_mode
+- include: phar/mode.yml
+  tags:
+    - composer
+    - phar
+    - mode
+
+- include: owner/apply.yml
+  tags:
+    - composer
+    - owner
+    - apply
+
+# requires:
+# - composer_group_name
+- include: group/create.yml
+  tags:
+    - composer
+    - group
+    - create
+
+# requires:
+# - composer_phar_path
+# - composer_group_name
+- include: group/apply.yml
+  tags:
+    - composer
+    - group
+    - apply
+
+# requires:
+# - composer_group_name
+# - composer_group_members
+- include: group/members.yml
+  when: 'composer_group_members|length > 0'
+  tags:
+    - composer
+    - group
+    - members
+
+# requires:
+# - composer_phar_path
+- include: executable/directory.yml
+  tags:
+    - composer
+    - executable
+    - directory
+
+# requires:
+# - composer_phar_path
+# - composer_executable_path
+- include: executable/link.yml
+  tags:
+    - composer
+    - executable
+    - link
+
+
+
+
+
+
+
+
+

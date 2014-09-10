@@ -1,0 +1,10 @@
+---
+
+- name: "composer:phar:mode | Set the phar archive's filemode "
+  file:
+    path: "{{item.file}}"
+    mode: "{{item.mode}}"
+  with_items:
+    - '{ "file": "{{ composer_phar_path }}", "mode": "{{ composer_phar_mode }}" }'
+  when: '( (item.file|default("none") != "none") and (item.mode|default("none") != "none") )'
+  sudo:  "yes"

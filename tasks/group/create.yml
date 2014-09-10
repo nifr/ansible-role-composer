@@ -1,0 +1,10 @@
+---
+
+- name: "composer:group:create | Create group for composer users "
+  group:
+    name: '{{ item.group }}'
+    state: 'present'
+  with_items:
+    - '{ "group": "{{ composer_group_name }}" }'
+  when: '( item.group|default("none") != "none" )'
+  sudo: yes

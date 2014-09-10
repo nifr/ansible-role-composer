@@ -1,0 +1,13 @@
+---
+
+- name: "composer:owner:apply | Set the phar archive's user ownership "
+    file:
+      path:  "{{item.file}}"
+      group: "{{item.set_owner}}"
+      state: file
+    with_items:
+      - '{ "file": "{{ composer_phar_path }}", "set_owner": "{{ composer_owner_name }}" }'
+    when: '( (item.file|default("none") != "none") and (item.set_group|default("none") != "none") )'
+    sudo: yes
+    tags:
+      - set

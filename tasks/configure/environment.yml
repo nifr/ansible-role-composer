@@ -1,0 +1,47 @@
+
+
+- name: 'Ensure home dir'
+  file:
+    state: directory
+    path:  '{{composer.configure.home}}'
+  when: "(composer.configure.home|default(undefined, true) is defined and (composer.configure.home|default(composer_defaults.configure.home, true) is not none)"
+  tags:
+    - configure
+    - directory
+    - composer_home
+
+- name: 'Ensure cache dir'
+  file:
+    state: directory
+    path:  '{{composer.configure.cache_dir}}'
+  when: "composer.configure.cache_dir|default(composer_defaults.configure.cache_dir, true) is not none"
+  tags:
+    - configure
+    - directory
+    - composer_cache_dir
+
+# ensure libpam-modules
+
+- name: 'Ensure $COMPOSER_HOME'
+  sudo: yes
+  lineinfile:
+    dest:   '/etc/security/pam_env.conf'
+    regexp: '^COMPOSER_HOME'
+    line:   "COMPOSER_HOME DEFAULT= OVERRIDE={{composer.configure.home|replace('~','${HOME}')}}"
+  when: "composer.configure.home|default(composer_defaults.configure.home, true) is not none"
+  tags:
+    - configure
+    - pam-env
+    - composer_home
+
+- name: 'Ensure $COMPOSER_CACHE_DIR'
+  sudo: yes
+  lineinfile:
+    dest:   '/etc/security/pam_env.conf'
+    regexp: '^COMPOSER_CACHE_DIR'
+    line:   "COMPOSER_CACHE_DIR DEFAULT= OVERRIDE={{composer.configure.cache_dir|replace('~','${HOME}')}}"
+  when: "composer.configure.cache_dir|default(composer_defaults.configure.cache_dir, true) is not none"
+  tags:
+    - configure
+    - pam-env
+    - composer_cache-dir

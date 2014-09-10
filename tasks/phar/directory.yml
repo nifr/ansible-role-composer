@@ -1,0 +1,10 @@
+---
+
+- name: "composer:phar:directory | Ensure target directory exists "
+  file:
+    state: "directory"
+    path: "{{ item.directory }}"
+  with_items:
+    - '{ "directory": "{{ composer_phar_path|dirname }}"}'
+  when: '( item|default("none") != "none" )'
+  sudo: "yes"

@@ -1,0 +1,6 @@
+---
+
+- include: composer.yml
+  when: true
+  tags:
+    - composer
