@@ -1,24 +1,20 @@
-composer:
-  download:
-    url:       'https://getcomposer.org/composer.phar'
-  phar:
-    path:      '/opt/composer/composer.phar'
-  executable:
-    path:      '/usr/local/bin/composer'
-    group:     ~
-    mode:      '0770'
-  config:
-    home:      '~/.configure/composer'
-    cache_dir: '~/.cache/composer'
-
-
-composer_download_url:     'https://getcomposer.org/composer.phar'
-composer_phar_path:        '/opt/composer/composer.phar'
-composer_executable_path:  '/usr/local/bin/composer'
-composer_phar_owner:       'root'
-composer_phar_mode:        '0770'
-composer_owner_name:       'root'
-composer_group_name:       'composer'
-composer_group_members:    []
-composer_config_home:      '~/.configure/composer'
-composer_config_cache_dir: '~/.cache/composer'
+composer_download_url:           'https://getcomposer.org/composer.file'
+composer_download_force:         false
+composer_file_path:              '/opt/composer/composer.phar'
+composer_executable_path:        '/usr/local/bin/composer'
+composer_file_mode:              '0770'
+composer_file_owner_name:        ~
+composer_file_group_name:        'composer'
+composer_file_group_members:     []
+composer_config_home:            '~/.configuration/composer'
+composer_config_cache_dir:       '~/.cache/composer'
+composer_bash_alias_enable:      false
+composer_bash_alias_name:        'c'
+composer_bash_alias_path:        ~
+composer_bash_completion_enable: false
+composer_zsh_alias_enable:       false
+composer_zsh_alias_name:         'c'
+composer_zsh_alias_path:         ~
+composer_zsh_completion_enable:  false
+composer_install_status_command: ~
+composer_file_exists:            false
