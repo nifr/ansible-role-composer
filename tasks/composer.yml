@@ -1,99 +1,40 @@
 ---
 
-# requires:
-# - composer_phar_path
-# creates:
-# - composer_is_installed
-- include: phar/status.yml
-  tags:
-    - composer
-    - phar
-    - status
+- include: "composer/get/file/status.yml"
+  tags:    [composer, get, file, status]
 
-# requires:
-# - composer_phar_path
-- include: phar/directory.yml
-  when: "not composer_phar_exists|bool"
-  tags:
-    - composer
-    - phar
-    - directory
+- include: "composer/create/file/directory.yml"
+  when:    '( not composer_file_exists|bool )'
+  tags:    [composer, create, target, directory]
 
-# requires:
-# - composer_download_url
-# - composer_phar_path
-# - composer_is_installed
-- include: phar/download.yml
-  when: "not composer_phar_exists|bool"
-  tags:
-    - composer
-    - phar
-    - download
+- include: "composer/download/file.yml"
+  when:    '( (not composer_file_exists|bool) or (composer_download_force|bool) )'
+  tags:    [composer, download, file]
 
-# requires:
-# - composer_phar_path
-# - composer_executable_mode
-- include: phar/mode.yml
-  tags:
-    - composer
-    - phar
-    - mode
+- include: "composer/set/file/mode.yml"
+  when:    '(composer_file_mode|default(none) != none)'
+  tags:    [composer, set, file, mode]
 
-- include: owner/apply.yml
-  tags:
-    - composer
-    - owner
-    - apply
+- include: "composer/set/file/owner.yml"
+  when:    '( composer_file_owner_name|default(none, true) != none )'
+  tags:    [composer, set, file, owner]
 
-# requires:
-# - composer_group_name
-- include: group/create.yml
-  tags:
-    - composer
-    - group
-    - create
+- include: "composer/create/file/group.yml"
+  when:    '( composer_file_group_name|default(none, true) != none )'
+  tags:    [composer, create, file, group]
 
-# requires:
-# - composer_phar_path
-# - composer_group_name
-- include: group/apply.yml
-  tags:
-    - composer
-    - group
-    - apply
+- include: "composer/set/file/group/members.yml"
+  when:    '( (composer_file_group_name|default(none, true) != none) and (composer_file_group_members|length > 0) )'
+  tags:    [composer, set, file, group, members]
 
-# requires:
-# - composer_group_name
-# - composer_group_members
-- include: group/members.yml
-  when: 'composer_group_members|length > 0'
-  tags:
-    - composer
-    - group
-    - members
+- include: "composer/set/file/group.yml"
+  when:    '( composer_file_group_name|default(none, true) != none )'
+  tags:    [composer, set, file, group]
 
-# requires:
-# - composer_phar_path
-- include: executable/directory.yml
-  tags:
-    - composer
-    - executable
-    - directory
+- include: "composer/create/executable/directory.yml"
+  when:    '( composer_executable_path|default(none, true) != none )'
+  tags:    [composer, create, executable, directory]
 
-# requires:
-# - composer_phar_path
-# - composer_executable_path
-- include: executable/link.yml
-  tags:
-    - composer
-    - executable
-    - link
-
-
-
-
-
-
-
-
-
+- include: "composer/enable/executable.yml"
+  when:    '( composer_executable_path|default(none, true) != none )'
+  tags:    [composer, enable, executable]
