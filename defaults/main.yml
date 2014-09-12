@@ -1,4 +1,4 @@
-composer_download_url:           'https://getcomposer.org/composer.file'
+composer_download_url:           'https://getcomposer.org/composer.phar'
 composer_download_force:         false
 composer_file_path:              '/opt/composer/composer.phar'
 composer_executable_path:        '/usr/local/bin/composer'
