@@ -13,7 +13,6 @@ install:
   - pip install ansible
   - ansible --version
 script:
-  - cd tests/$TEST
   - echo  localhost > inventory
   - echo  "[defaults]"                      >  ansible.cfg
   - echo  "roles_path = ../../../../"       >> ansible.cfg
