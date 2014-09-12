@@ -21,7 +21,8 @@ script:
   - echo  "  - 'vars/main.yml'"                    >> ansible.cfg
   - cat   ansible.cfg
   - echo  "---"                                    >  playbook.yml
-  - echo  "- roles:"                               >> playbook.yml
+  - echo  "  hosts: localhost"                     >> playbook.yml
+  - echo  "  roles:"                               >> playbook.yml
   - echo  "    - $(basename $(realpath .))"        >> playbook.yml
   - cat   playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
