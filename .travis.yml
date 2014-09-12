@@ -15,13 +15,15 @@ install:
 script:
   - echo  localhost > inventory
   - echo  "[defaults]"                      >> tests/$TEST/ansible.cfg
-  - echo  "roles_path = ../../"             >> tests/$TEST/ansible.cfg
+  - echo  "roles_path = ../../../           >> tests/$TEST/ansible.cfg
   - echo  "remote_user = root"              >> tests/$TEST/ansible.cfg
   - echo  "vars_files:"                     >> tests/$TEST/ansible.cfg
   - echo  "  - 'vars/main.yml'"             >> tests/$TEST/ansible.cfg
+  - cat   tests/$TEST/ansible.cfg
   - echo  "---"                             >> tests/$TEST/playbook.yml
   - echo  "- roles:"                        >> tests/$TEST/playbook.yml
   - echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
+  - cat   tests/$TEST/playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks tests/$TEST/playbook.yml
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/validate.yml
