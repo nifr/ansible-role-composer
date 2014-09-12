@@ -23,7 +23,8 @@ script:
   - cat   ansible.cfg
   - echo  "---"                             >  playbook.yml
   - echo  "- roles:"                        >> playbook.yml
-  - echo  "    - $(basename $(realpath ../../))" >> playbook.yml
+  - echo  "    - $(basename $(realpath .))" >> playbook.yml
+  - echo  "# pwd: $(realplath $(pwd))"      >> playbook.yml
   - cat   playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
 
