@@ -1,0 +1,27 @@
+---
+language: python
+python:
+  - "2.7"
+env:
+  - TEST=00-syntax
+  - TEST=01-defaults
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq realpath
+ - sudo apt-get install -qq python-apt python-pycurl
+install:
+  - pip install ansible
+  - ansible --version
+script:
+  - echo  localhost > inventory
+  - echo  "[defaults]"                      >> tests/$TEST/ansible.cfg
+  - echo  "roles_path = ../../"             >> tests/$TEST/ansible.cfg
+  - echo  "remote_user = root"              >> tests/$TEST/ansible.cfg
+  - echo  "vars_files:"                     >> tests/$TEST/ansible.cfg
+  - echo  "  - 'vars/main.yml'"             >> tests/$TEST/ansible.cfg
+  - echo  "---"                             >> tests/$TEST/playbook.yml
+  - echo  "- roles:"                        >> tests/$TEST/playbook.yml
+  - echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
+  - ansible-playbook -i inventory --syntax-check --list-tasks tests/$TEST/playbook.yml
+#  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
+#  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/validate.yml
