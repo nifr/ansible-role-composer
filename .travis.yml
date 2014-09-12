@@ -16,7 +16,7 @@ script:
   - cd tests/$TEST
   - echo  localhost > inventory
   - echo  "[defaults]"                      >  ansible.cfg
-  - echo  "roles_path = ../../../"          >> ansible.cfg
+  - echo  "roles_path = ../../../../"       >> ansible.cfg
   - echo  "remote_user = root"              >> ansible.cfg
   - echo  "vars_files:"                     >> ansible.cfg
   - echo  "  - 'vars/main.yml'"             >> ansible.cfg
@@ -24,7 +24,7 @@ script:
   - echo  "---"                             >  playbook.yml
   - echo  "- roles:"                        >> playbook.yml
   - echo  "    - $(basename $(realpath .))" >> playbook.yml
-  - echo  "# pwd: $(realplath $(pwd))"      >> playbook.yml
+  - echo  "# pwd: $(realpath $(pwd))"      >> playbook.yml
   - cat   playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
 
