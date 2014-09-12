@@ -14,15 +14,15 @@ install:
   - ansible --version
 script:
   - echo  localhost > inventory
-  - echo  "[defaults]"                      >  ansible.cfg
-  - echo  "roles_path = ../../../../"       >> ansible.cfg
-  - echo  "remote_user = root"              >> ansible.cfg
-  - echo  "vars_files:"                     >> ansible.cfg
-  - echo  "  - 'vars/main.yml'"             >> ansible.cfg
+  - echo  "[defaults]"                             >  ansible.cfg
+  - echo  "roles_path = $(dirname $(realpath .))"  >> ansible.cfg
+  - echo  "remote_user = root"                     >> ansible.cfg
+  - echo  "vars_files:"                            >> ansible.cfg
+  - echo  "  - 'vars/main.yml'"                    >> ansible.cfg
   - cat   ansible.cfg
-  - echo  "---"                             >  playbook.yml
-  - echo  "- roles:"                        >> playbook.yml
-  - echo  "    - $(basename $(realpath .))" >> playbook.yml
+  - echo  "---"                                    >  playbook.yml
+  - echo  "- roles:"                               >> playbook.yml
+  - echo  "    - $(basename $(realpath .))"        >> playbook.yml
   - cat   playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
 
