@@ -25,5 +25,6 @@ script:
   - echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
   - cat   tests/$TEST/playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks tests/$TEST/playbook.yml
+
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/validate.yml
