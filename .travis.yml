@@ -13,18 +13,19 @@ install:
   - pip install ansible
   - ansible --version
 script:
+  - echo $PWD
   - echo  localhost > inventory
-  - cd tests/$TEST && echo  "[defaults]"                      >  ansible.cfg
-  - cd tests/$TEST && echo  "roles_path = ../../../"          >> ansible.cfg
-  - cd tests/$TEST && echo  "remote_user = root"              >> ansible.cfg
-  - cd tests/$TEST && echo  "vars_files:"                     >> ansible.cfg
-  - cd tests/$TEST && echo  "  - 'vars/main.yml'"             >> ansible.cfg
-  - cd tests/$TEST && cat   ansible.cfg
-  - cd tests/$TEST && echo  "---"                             >  playbook.yml
-  - cd tests/$TEST && echo  "- roles:"                        >> playbook.yml
-  - cd tests/$TEST && echo  "    - $(basename $(realpath .))" >> playbook.yml
-  - cd tests/$TEST && cat   playbook.yml
-  - cd tests/$TEST && ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
+  - cd tests/$TEST && echo $PWD && echo  "[defaults]"                      >  ansible.cfg
+  - cd tests/$TEST && echo $PWD && echo  "roles_path = ../../../"          >> ansible.cfg
+  - cd tests/$TEST && echo $PWD && echo  "remote_user = root"              >> ansible.cfg
+  - cd tests/$TEST && echo $PWD && echo  "vars_files:"                     >> ansible.cfg
+  - cd tests/$TEST && echo $PWD && echo  "  - 'vars/main.yml'"             >> ansible.cfg
+  - cd tests/$TEST && echo $PWD && cat   ansible.cfg
+  - cd tests/$TEST && echo $PWD && echo  "---"                             >  playbook.yml
+  - cd tests/$TEST && echo $PWD && echo  "- roles:"                        >> playbook.yml
+  - cd tests/$TEST && echo $PWD && echo  "    - $(basename $(realpath .))" >> playbook.yml
+  - cd tests/$TEST && echo $PWD && cat   playbook.yml
+  - cd tests/$TEST && echo $PWD && ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
 
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/validate.yml
