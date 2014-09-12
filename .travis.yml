@@ -14,13 +14,13 @@ install:
   - ansible --version
 script:
   - echo  localhost > inventory
-  - echo  "[defaults]"                      >> tests/$TEST/ansible.cfg
-  - echo  "roles_path = ../../../           >> tests/$TEST/ansible.cfg
+  - echo  "[defaults]"                      > tests/$TEST/ansible.cfg
+  - echo  "roles_path = ../../../"          >> tests/$TEST/ansible.cfg
   - echo  "remote_user = root"              >> tests/$TEST/ansible.cfg
   - echo  "vars_files:"                     >> tests/$TEST/ansible.cfg
   - echo  "  - 'vars/main.yml'"             >> tests/$TEST/ansible.cfg
   - cat   tests/$TEST/ansible.cfg
-  - echo  "---"                             >> tests/$TEST/playbook.yml
+  - echo  "---"                             > tests/$TEST/playbook.yml
   - echo  "- roles:"                        >> tests/$TEST/playbook.yml
   - echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
   - cat   tests/$TEST/playbook.yml
