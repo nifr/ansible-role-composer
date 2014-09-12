@@ -14,16 +14,16 @@ install:
   - ansible --version
 script:
   - echo  localhost > inventory
-  - echo  "[defaults]"                      > tests/$TEST/ansible.cfg
-  - echo  "roles_path = ../../../"          >> tests/$TEST/ansible.cfg
-  - echo  "remote_user = root"              >> tests/$TEST/ansible.cfg
-  - echo  "vars_files:"                     >> tests/$TEST/ansible.cfg
-  - echo  "  - 'vars/main.yml'"             >> tests/$TEST/ansible.cfg
-  - cat   tests/$TEST/ansible.cfg
-  - echo  "---"                             > tests/$TEST/playbook.yml
-  - echo  "- roles:"                        >> tests/$TEST/playbook.yml
-  - echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
-  - cat   tests/$TEST/playbook.yml
+  - cd tests/$TEST && echo  "[defaults]"                      > tests/$TEST/ansible.cfg
+  - cd tests/$TEST && echo  "roles_path = ../../../"          >> ansible.cfg
+  - cd tests/$TEST && echo  "remote_user = root"              >> tests/$TEST/ansible.cfg
+  - cd tests/$TEST && echo  "vars_files:"                     >> tests/$TEST/ansible.cfg
+  - cd tests/$TEST && echo  "  - 'vars/main.yml'"             >> tests/$TEST/ansible.cfg
+  - cd tests/$TEST && cat   ansible.cfg
+  - cd tests/$TEST && echo  "---"                             > tests/$TEST/playbook.yml
+  - cd tests/$TEST && echo  "- roles:"                        >> tests/$TEST/playbook.yml
+  - cd tests/$TEST && echo  "    - $(basename $(realpath .))" >> tests/$TEST/playbook.yml
+  - cd tests/$TEST && cat   playbook.yml
   - ansible-playbook -i inventory --syntax-check --list-tasks tests/$TEST/playbook.yml
 
 #  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
