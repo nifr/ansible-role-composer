@@ -15,17 +15,17 @@ install:
 script:
   - echo  localhost > inventory
   - echo  "[defaults]"                             >  ansible.cfg
+  - echo  "hostfile = ./inventory"                 >> ansible.cfg
   - echo  "roles_path = $(dirname $(realpath .))"  >> ansible.cfg
   - echo  "remote_user = root"                     >> ansible.cfg
-  - echo  "vars_files:"                            >> ansible.cfg
-  - echo  "  - 'vars/main.yml'"                    >> ansible.cfg
+  - echo  "transport = local"                      >> ansible.cfg
+#  - echo  "vars_files:"                            >> ansible.cfg
+#  - echo  "  - 'vars/main.yml'"                    >> ansible.cfg
   - cat   ansible.cfg
   - echo  "---"                                    >  playbook.yml
-  - 'echo  "- hosts: localhost"                     >> playbook.yml'
+  - 'echo  "- hosts: localhost"                    >> playbook.yml'
   - echo  "  roles:"                               >> playbook.yml
   - echo  "    - $(basename $(realpath .))"        >> playbook.yml
   - cat   playbook.yml
-  - ansible-playbook -i inventory --syntax-check --list-tasks playbook.yml
-
-#  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/playbook.yml
-#  - ansible-playbook -i inventory --connection=local --sudo -vvvv tests/01-defaults/validate.yml
+  - ansible-playbook --syntax-check --list-tasks playbook.yml
+  - ansible-playbook --sudo -vvvv playbook.yml
