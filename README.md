@@ -1,0 +1,3 @@
+[![Build Status](https://travis-ci.org/nifr/ansible-role-composer.svg?branch=master)](https://travis-ci.org/nifr/ansible-role-composer)
+
+Work in progress ...
