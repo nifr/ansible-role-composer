@@ -15,14 +15,14 @@ install:
 script:
 
   - 'echo  localhost > inventory'
-  - 'echo  "[defaults]"                             >  ansible.cfg
+  - 'echo  "[defaults]"                             >  ansible.cfg'
   - 'echo  "hostfile = ./inventory"                 | tee -a !$'
   - 'echo  "roles_path = $(dirname $(realpath .))"  | tee -a !$'
   - 'echo  "remote_user = root"                     | tee -a !$'
   - 'echo  "transport = local"                      | tee -a !$'
   - 'cat   !$'
 
-  - 'echo  "---"                                    >  playbook.yml
+  - 'echo  "---"                                    >  playbook.yml'
   - 'echo  "- hosts: localhost"                     | tee -a !$'
   - 'echo  "  roles:"                               | tee -a !$'
   - 'echo  "    - $(basename $(realpath .))"        | tee -a !$'
