@@ -16,19 +16,19 @@ script:
 
   - 'echo  localhost > inventory'
   - 'echo  "[defaults]"                             >  ansible.cfg'
-  - 'echo  "hostfile = ./inventory"                 | tee -a !$'
-  - 'echo  "roles_path = $(dirname $(realpath .))"  | tee -a !$'
-  - 'echo  "remote_user = root"                     | tee -a !$'
-  - 'echo  "transport = local"                      | tee -a !$'
-  - 'cat   !$'
+  - 'echo  "hostfile = ./inventory"                 >> ansible.cfg'
+  - 'echo  "roles_path = $(dirname $(realpath .))"  >> ansible.cfg'
+  - 'echo  "remote_user = root"                     >> ansible.cfg'
+  - 'echo  "transport = local"                      >> ansible.cfg'
+  - 'cat   ansible.cfg'
 
   - 'echo  "---"                                    >  playbook.yml'
-  - 'echo  "- hosts: localhost"                     | tee -a !$'
-  - 'echo  "  roles:"                               | tee -a !$'
-  - 'echo  "    - $(basename $(realpath .))"        | tee -a !$'
-  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "    - tests/$TEST/vars/main.yml" | tee -a !$'
-  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "    - tests/$TEST/vars/main.yml" | tee -a !$'
-  - 'cat !$'
+  - 'echo  "- hosts: localhost"                     >>  playbook.yml'
+  - 'echo  "  roles:"                               >>  playbook.yml'
+  - 'echo  "    - $(basename $(realpath .))"        >>  playbook.yml'
+  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "    vars_files:" | tee -a playbook.yml'
+  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "    - tests/$TEST/vars/main.yml" | tee -a playbook.yml'
+  - 'cat playbook.yml'
 
   - ansible-playbook --syntax-check --list-tasks playbook.yml
   - ansible-playbook --sudo -vvvv playbook.yml
