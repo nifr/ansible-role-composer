@@ -12,7 +12,7 @@ before_install:
  - sudo apt-get install -qq realpath
  - sudo apt-get install -qq python-apt python-pycurl
 install:
-  - pip install ansible
+  - sudo pip install ansible
   - ansible --version
 script:
 
@@ -34,6 +34,7 @@ script:
 
   - ansible-playbook --syntax-check --list-tasks playbook.yml
   - ansible-playbook --sudo -vvvv playbook.yml
+  - bundle exec rake spec
   - >
     ansible-playbook --sudo -vvvv playbook.yml
     | grep -q 'changed=0.*failed=0'
