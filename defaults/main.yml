@@ -2,9 +2,9 @@ composer_download_url:           'https://getcomposer.org/composer.phar'
 composer_download_force:         false
 composer_file_path:              '/opt/composer/composer.phar'
 composer_executable_path:        '/usr/local/bin/composer'
-composer_file_mode:              '0770'
+composer_file_mode:              '0755'
 composer_file_owner_name:        ~
-composer_file_group_name:        'composer'
+composer_file_group_name:        ~
 composer_file_group_members:     []
 composer_config_home:            '~/.configuration/composer'
 composer_config_cache_dir:       '~/.cache/composer'
