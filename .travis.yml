@@ -5,8 +5,8 @@ rvm:
 # python:
 #  - "2.7"
 env:
-  - TEST=00-syntax
-  - TEST=01-defaults
+  - TEST_SUITE=01-defaults
+  - TEST_SUITE=02-group
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq realpath
@@ -30,8 +30,8 @@ script:
   - 'echo  "- hosts: localhost"                     >>  playbook.yml'
   - 'echo  "  roles:"                               >>  playbook.yml'
   - 'echo  "    - $(basename $(realpath .))"        >>  playbook.yml'
-  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "  vars_files:" | tee -a playbook.yml'
-  - 'test ! -f tests/$TEST/vars/main.yml && return 0 || echo "    - tests/$TEST/vars/main.yml" | tee -a playbook.yml'
+  - 'test ! -f tests/$TEST_SUITE/vars/main.yml && return 0 || echo "  vars_files:" | tee -a playbook.yml'
+  - 'test ! -f tests/$TEST_SUITE/vars/main.yml && return 0 || echo "    - tests/$TEST_SUITE/vars/main.yml" | tee -a playbook.yml'
   - 'cat playbook.yml'
 
   - ansible-playbook --syntax-check --list-tasks playbook.yml
