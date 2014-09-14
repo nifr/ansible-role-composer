@@ -5,7 +5,6 @@ describe file('/opt/composer/composer.phar') do
   it { should be_file }
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'testgroup' }
-  it { should be_executable.by_user('root') }
 end
 
 describe file('/usr/local/bin/composer') do
