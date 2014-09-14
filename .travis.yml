@@ -12,8 +12,10 @@ before_install:
  - sudo apt-get install -qq realpath
  - sudo apt-get install -qq python-apt python-pycurl
 install:
+  - python --version
   - sudo pip install ansible
   - ansible --version
+  - bundle install
 script:
 
   - 'echo  localhost > inventory'
