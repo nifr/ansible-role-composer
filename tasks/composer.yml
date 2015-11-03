@@ -38,3 +38,9 @@
 - include: "composer/enable/executable.yml"
   when:    '( composer_executable_path|default(none, true) != none )'
   tags:    [composer, enable, executable]
+
+- include: "composer/get/auth/github.yml"
+  tags:    [composer, get, auth, github]
+
+- include: "composer/set/auth/github.yml"
+  tags:    [composer, set, auth, github]
