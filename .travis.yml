@@ -7,10 +7,16 @@ rvm:
 env:
   - TEST_SUITE=01-defaults
   - TEST_SUITE=02-group
+  - TEST_SUITE=03-github-auth
+cache:
+  - pip
+  - apt
+  - bundler
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq realpath
  - sudo apt-get install -qq python-apt python-pycurl
+ - sudo apt-get install php5-cli
 install:
   - python --version
   - sudo pip install ansible

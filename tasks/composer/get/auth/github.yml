@@ -1,0 +1,8 @@
+---
+
+##
+## @param composer_auth_github_token
+##
+- name: "composer:get:auth:github:register | Lookup for GitHub access token in environment variables"
+  set_fact: "composer_auth_github_token={{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
+  when: "{{ lookup('env', 'GITHUB_ACCESS_TOKEN') != '' }}"
