@@ -7,7 +7,7 @@ rvm:
 env:
   - TEST_SUITE=01-defaults
   - TEST_SUITE=02-group
-  - TEST_SUITE=03-github-auth
+#  - TEST_SUITE=03-github-auth
 cache:
   - pip
   - apt
