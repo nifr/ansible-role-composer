@@ -1,0 +1,7 @@
+---
+
+- name: "composer:self:update | Update Composer to latest version"
+  command: "composer self-update --no-progress"
+  sudo: yes
+  register: "composer_self_update_command"
+  changed_when: 'composer_self_update_command.stderr.find("You are already using") == -1'

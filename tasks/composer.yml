@@ -39,6 +39,9 @@
   when:    '( composer_executable_path|default(none, true) != none )'
   tags:    [composer, enable, executable]
 
+- include: "composer/self/update.yml"
+  tags:    [composer, self, update]
+
 - include: "composer/get/auth/github.yml"
   tags:    [composer, get, auth, github]
 
