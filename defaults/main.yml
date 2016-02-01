@@ -6,15 +6,7 @@ composer_file_mode:              '0755'
 composer_file_owner_name:        ~
 composer_file_group_name:        ~
 composer_file_group_members:     []
-composer_config_home:            '~/.configuration/composer'
-composer_config_cache_dir:       '~/.cache/composer'
-composer_bash_alias_enable:      false
-composer_bash_alias_name:        'c'
-composer_bash_alias_path:        ~
-composer_bash_completion_enable: false
-composer_zsh_alias_enable:       false
-composer_zsh_alias_name:         'c'
-composer_zsh_alias_path:         ~
-composer_zsh_completion_enable:  false
 composer_install_status_command: ~
 composer_file_exists:            false
+composer_global_config:          {}
+composer_global_require:         []

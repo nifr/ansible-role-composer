@@ -1,0 +1,8 @@
+---
+
+- name: "composer:global:require | Install global packages."
+  command: 'composer global require {{ composer_global_require|join(" ") }}'
+  sudo: false
+  when: composer_global_require|length > 0
+  register: "composer_global_require_command"
+  changed_when: 'composer_global_require_command.stderr.find("Nothing to install or update") == -1'

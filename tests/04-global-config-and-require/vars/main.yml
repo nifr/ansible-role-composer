@@ -1,0 +1,18 @@
+---
+
+composer_global_config:
+
+  - key: process-timeout
+    value:
+      - 156
+
+  - key: sort-packages
+    value:
+      - "true"
+
+  - key: repositories.hello
+    value:
+    - '{"type": "vcs","url": "https://github.com/andrioli/hello-composer"}'
+
+composer_global_require:
+  - "andrioli/hello-composer:dev-master"

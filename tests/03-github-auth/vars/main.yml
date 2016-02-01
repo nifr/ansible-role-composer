@@ -1,3 +1,12 @@
 ---
 
-composer_auth_github_token: 123
+composer_global_config:
+
+  - key: 'http-basic.my-repo.example.org'
+    value:
+      - user
+      - pass
+
+  - key: "github-oauth.github.com"
+    value:
+      - githubSeecret

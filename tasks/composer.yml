@@ -42,8 +42,8 @@
 - include: "composer/self/update.yml"
   tags:    [composer, self, update]
 
-- include: "composer/get/auth/github.yml"
-  tags:    [composer, get, auth, github]
+- include: "composer/global/config.yml"
+  tags:    [composer, global, config]
 
-- include: "composer/set/auth/github.yml"
-  tags:    [composer, set, auth, github]
+- include: "composer/global/require.yml"
+  tags:    [composer, global, require]
