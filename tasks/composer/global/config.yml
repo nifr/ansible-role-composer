@@ -1,0 +1,7 @@
+---
+
+- name: "composer:global:config | Set global config settings."
+  command: 'composer config --global {{ item.key }} ''{{ item.value|join("'' ''") }}'''
+  sudo: false
+  with_items: composer_global_config
+  changed_when: false

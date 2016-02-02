@@ -7,7 +7,8 @@ rvm:
 env:
   - TEST_SUITE=01-defaults
   - TEST_SUITE=02-group
-#  - TEST_SUITE=03-github-auth
+  - TEST_SUITE=03-github-auth
+  - TEST_SUITE=04-global-config-and-require
 cache:
   - pip
   - apt
@@ -23,7 +24,7 @@ install:
   - ansible --version
   - bundle install
 script:
-
+  - 'export COMPOSER_HOME="$(mktemp -d)"'
   - 'echo  localhost > inventory'
   - 'echo  "[defaults]"                             >  ansible.cfg'
   - 'echo  "hostfile = ./inventory"                 >> ansible.cfg'
@@ -36,6 +37,8 @@ script:
   - 'echo  "- hosts: localhost"                     >>  playbook.yml'
   - 'echo  "  roles:"                               >>  playbook.yml'
   - 'echo  "    - $(basename $(realpath .))"        >>  playbook.yml'
+  - 'echo  "  environment:"                         >>  playbook.yml'
+  - 'echo  "    COMPOSER_HOME: $COMPOSER_HOME"      >>  playbook.yml'
   - 'test ! -f tests/$TEST_SUITE/vars/main.yml && return 0 || echo "  vars_files:" | tee -a playbook.yml'
   - 'test ! -f tests/$TEST_SUITE/vars/main.yml && return 0 || echo "    - tests/$TEST_SUITE/vars/main.yml" | tee -a playbook.yml'
   - 'cat playbook.yml'
